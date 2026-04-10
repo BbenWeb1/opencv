@@ -1,0 +1,11 @@
+ARG_ENABLE('opencv', 'opencv support', 'no');
+
+var OPENCV_VERSION = "4100"; 
+
+if (PHP_OPENCV != 'no') {
+	ADD_FLAG("CFLAGS_OPENCV", "/EHsc  /K /DEBUG /I C:\\libjpeg-turbo64\\include");
+	if(CHECK_LIB("opencv_world"+OPENCV_VERSION+".lib","opencv","C:\\CPPOpenCV\\build\\x64\\vc16\\lib")&&
+	CHECK_HEADER_ADD_INCLUDE("opencv2\\opencv.hpp", "CFLAGS_OPENCV", "C:\\CPPOpenCV\\build\\include")){
+		EXTENSION('opencv', 'opencv.cc', null, '/DZEND_ENABLE_STATIC_TSRMLS_CACHE=1');
+	}
+}
